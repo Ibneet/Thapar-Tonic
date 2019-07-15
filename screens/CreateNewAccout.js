@@ -7,7 +7,7 @@ export default class CreateNewAccount extends React.Component {
     return(
       <View style={styles.container1}>
         <View style={styles.container2}>
-          <Image source={require('../src/Images/noimage.jpg')}
+          <Image source={require('../assets/noimage.jpg')}
           style={{ width: 100, height: 100 }}/>
         </View>
         <View style={styles.container3}>

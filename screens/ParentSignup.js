@@ -5,7 +5,7 @@ import { Entypo } from '@expo/vector-icons'
 
 export default class ParentSignup extends React.Component {
 
-    static navigationOption = {
+    static navigationOptions = {
         title: 'Thapar Tonic'
     }
 

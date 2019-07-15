@@ -3,10 +3,11 @@ import { View, Text, StyleSheet,Image, Button, TextInput,TouchableOpacity,Scroll
 import DatePicker from 'react-native-datepicker'
 import {Picker} from 'native-base'
 import { Entypo } from '@expo/vector-icons'
+import * as firebase from 'firebase'
 
 export default class Student extends React.Component {
 
-    static navigationOption = {
+    static navigationOptions = {
         title: 'Thapar Tonic'
     }
     
@@ -14,7 +15,6 @@ export default class Student extends React.Component {
         super(props);
         this.state = {
             name: '',
-            Identity: '',
             roll:'',
             inputPassword: '',
             date:"1999-06-06",
@@ -24,6 +24,28 @@ export default class Student extends React.Component {
             // degree:''
         }
     }
+
+  signupUser =(name, roll, phone, date, email, inputPassword)=>{
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, inputPassword)
+        .then(authenticate => {
+            return authenticate.user
+            .updateProfile({
+                displayName: name,
+                displayEmail: email,
+                displayRoll: roll,
+                displayPhone: phone
+            })
+            .then(() => {
+                this.props.navigation.replace('Login')
+            })
+        })
+        .catch( error => {
+            alert(error.message)
+        } )
+
+  } 
 
   render() {
 
@@ -84,7 +106,7 @@ export default class Student extends React.Component {
                             selectionColor='#FFF'
                             keyboardType= 'numeric'
                             placeholder= 'Phone Number'
-                            value= {this.state.roll}
+                            value= {this.state.phone}
                             onChangeText={phone =>
                                 this.setState({
                                     phone
@@ -182,7 +204,17 @@ export default class Student extends React.Component {
                     <View style={styles.button}>  
                         <Button 
                         title='Submit'
-                        // onPress={() => {this.props.navigation.navigate('CreateNewAccount')}}
+                        onPress={() => {
+                            this.signupUser(
+                                this.state.name,
+                                this.state.roll,
+                                this.state.phone,
+                                this.state.date,
+                                this.state.email,
+                                this.state.inputPassword
+                            )
+                            
+                        }}
                         />
                     </View>
                 </View>

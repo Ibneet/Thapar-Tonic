@@ -1,14 +1,41 @@
 import React from 'react';
-import { View, Text, StyleSheet,Image, Button, Picker, TextInput, ScrollView,TouchableWithoutFeedback } from 'react-native';
+import { View, Text, StyleSheet,Image, Button, Picker, ScrollView, TextInput } from 'react-native';
+import Student from './Student';
+import * as firebase from 'firebase'
 
 export default class Login extends React.Component {
+
+    static navigationOptions = {
+    title: 'Thapar Tonic'
+    }
     constructor(props){
         super(props);
         this.state = {
-            inputValue: '',
+            email: '',
             Identity: '',
-            inputPassword: ''
+            password: ''
         }
+    }
+
+    signInUser = (email, password, Identity) => {
+      firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then(() => {
+        if(Identity === 'Student'){
+          this.props.navigation.replace('HomeStudent')
+        }else if(Identity === 'Teacher'){
+          this.props.navigation.replace('HomeTeacher')
+        } else if(Identity === 'Parent'){
+          this.props.navigation.replace('HomeParent')
+        } else {
+          alert('Select option')
+        }
+
+      })
+      .catch(error => {
+        alert(error.message)
+      })
     }
 
   render() {
@@ -16,7 +43,7 @@ export default class Login extends React.Component {
       <ScrollView>
       <View style={styles.container1}>
         <View style={styles.container2}>
-          <Image source={require('../src/Images/noimage.jpg')}
+          <Image source={require('../assets/noimage.jpg')}
           style={{ width: 100, height: 100 }}/>
         </View>
         <View style={styles.container3}>
@@ -27,6 +54,7 @@ export default class Login extends React.Component {
                 onValueChange={(itemValue, itemIndex) =>
                     this.setState({Identity: itemValue})
                 }>
+                <Picker.Item label="Select" value="" />
                 <Picker.Item label="Student" value="Student" />
                 <Picker.Item label="Teacher" value="Teacher" />
                 <Picker.Item label="Parent" value="Parent" />
@@ -35,11 +63,11 @@ export default class Login extends React.Component {
             <TextInput style = {styles.input}
                 keyboardType= 'email-address'
                 placeholder= 'Email Address'
-                value= {this.state.inputValue}
+                value= {this.state.email}
                 selectionColor='#FFF'
-                onChangeText={inputValue =>
+                onChangeText={email =>
                     this.setState({
-                        inputValue
+                        email
                     })
                 }
             />
@@ -52,10 +80,10 @@ export default class Login extends React.Component {
                 selectionColor='#FFF'
                 keyboardType= 'default'
                 placeholder= 'Password'
-                value= {this.state.inputPassword}
-                onChangeText={inputPassword =>
+                value= {this.state.password}
+                onChangeText={password =>
                     this.setState({
-                        inputPassword
+                        password
                     })
                 }
             />
@@ -63,7 +91,11 @@ export default class Login extends React.Component {
         <View style={{paddingTop: 10, width:210, height:60}}>  
             <Button 
             title='Log In'
-            // onPress={() => {this.props.navigation.navigate('CreateNewAccount')}}
+            onPress={() => {this.signInUser(
+              this.state.email,
+              this.state.password,
+              this.state.Identity
+            )}}
             />
         </View>
 

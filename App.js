@@ -8,6 +8,23 @@ import TeacherSignup from './screens/TeacherSignup';
 import ParentSignup from './screens/ParentSignup';
 import CameraParent from './screens/CameraParent';
 import CameraTeacher from './screens/CameraTeacher';
+import HomeStudent from './screens/HomeStudent';
+import HomeTeacher from './screens/HomeTeacher';
+import HomeParent from './screens/HomeParent';
+import * as firebase from 'firebase'
+
+
+var firebaseConfig = {
+  apiKey: "AIzaSyCY02kgs1SCdzd-lgNPOq9ZLY8ZMVsGKVw",
+  authDomain: "campus-tonic.firebaseapp.com",
+  databaseURL: "https://campus-tonic.firebaseio.com",
+  projectId: "campus-tonic",
+  storageBucket: "",
+  messagingSenderId: "455096113702",
+  appId: "1:455096113702:web:bf746f18376f410c"
+};
+
+firebase.initializeApp(firebaseConfig)
 
 const MainNavigator = createStackNavigator(
   {
@@ -19,7 +36,11 @@ const MainNavigator = createStackNavigator(
    TeacherSignup: {screen: TeacherSignup},
    ParentSignup: {screen: ParentSignup},
    CameraParent: {screen: CameraParent},
-   CameraTeacher: {screen: CameraTeacher}
+   CameraTeacher: {screen: CameraTeacher},
+   HomeParent: {screen: HomeParent},
+   HomeStudent: {screen: HomeStudent},
+   HomeTeacher: {screen: HomeTeacher}
+
   },
   {
     defaultNavigationOptions: {

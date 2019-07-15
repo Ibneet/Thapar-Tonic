@@ -14,7 +14,7 @@ export default class CameraScreen extends React.Component {
         }
     }
 
-    static navigationOption = {
+    static navigationOptions = {
         title: 'Thapar Tonic'
     }
 

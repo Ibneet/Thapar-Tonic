@@ -14,7 +14,7 @@ export default class CameraParent extends React.Component {
         }
     }
 
-    static navigationOption = {
+    static navigationOptions = {
         title: 'Thapar Tonic'
     }
 
