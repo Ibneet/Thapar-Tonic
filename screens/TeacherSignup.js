@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, Text, StyleSheet,Image, Button, TextInput,TouchableOpacity,ScrollView, KeyboardAvoidingView} from 'react-native';
+import { View, Text, StyleSheet,Image, TextInput,TouchableOpacity,ScrollView, KeyboardAvoidingView} from 'react-native';
 import DatePicker from 'react-native-datepicker'
 import { Entypo } from '@expo/vector-icons'
+import { Button } from 'native-base'
 
 export default class TeacherSignup extends React.Component {
 
@@ -30,7 +31,9 @@ export default class TeacherSignup extends React.Component {
         <KeyboardAvoidingView behavior='height' enabled>
         <ScrollView>
             <View style={styles.container1}>
-                <Text>*Fill up the following details.</Text>
+            <TouchableOpacity activeOpacity={0.5} onPress={() => {
+                this.props.navigation.navigate('CameraTeacher')
+                }}>
                 <View style={[styles.imageHolder]}>
                 <Image 
                 resizeMode = 'center'
@@ -40,17 +43,7 @@ export default class TeacherSignup extends React.Component {
                 }
                 />
                 </View>
-                
-                <TouchableOpacity activeOpacity={0.5} onPress={() => {
-                    this.props.navigation.navigate('CameraTeacher')
-                }}>
-                    <Entypo 
-                    name='camera'
-                    size={30}
-                    />
-                </TouchableOpacity>
-                
-                
+            </TouchableOpacity>
                     <TextInput style = {styles.input}
                             keyboardType= 'default'
                             placeholder= 'Name'
@@ -142,9 +135,13 @@ export default class TeacherSignup extends React.Component {
                     
                     <View style={styles.button}>  
                         <Button 
-                        title='Submit'
+                        style={styles.button3}
+                        full
+                        rounded
                         // onPress={() => {this.props.navigation.navigate('CreateNewAccount')}}
-                        />
+                        >
+                            <Text style={styles.text}>Submit</Text>
+                        </Button>
                     </View>
                 </View>
                 <View style={styles.empty}></View>
@@ -159,17 +156,21 @@ const styles = StyleSheet.create({
     input: {
         width: 350,
         height: 55,
-        backgroundColor: '#42A5F5',
+        backgroundColor: '#333945',
         margin: 10,
         padding: 8,
         borderRadius: 14,
-        borderColor: '#111212',
-        borderWidth:1
+        borderColor: '#fff',
+        borderWidth:1,
+        fontSize: 18,
+        color: '#fff'
       },
     container1: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        backgroundColor: '#333945',
+        padding: 8
     },
     
   inputContainer: {
@@ -187,7 +188,8 @@ const styles = StyleSheet.create({
     borderWidth:2,
     borderRadius:50,
     overflow: 'hidden',
-    justifyContent:'center'
+    justifyContent:'center',
+    backgroundColor: '#fff'
   },
   imageButton: {
       height: 40,
@@ -204,12 +206,19 @@ const styles = StyleSheet.create({
     height: 40
     },
     empty: {
-      height: 500,
-      backgroundColor: '#fff'
-    },
-    empty: {
       height: 80,
-      backgroundColor: '#fff'
-    } 
+      backgroundColor: '#333945'
+    },
+    button3: {
+        margin: 10,
+        padding: 8,
+        borderColor: '#111212',
+        borderWidth:1
+     },
+     text: {
+       fontWeight: 'bold',
+       color: '#fff',
+       fontSize: 18
+     }  
 
 })

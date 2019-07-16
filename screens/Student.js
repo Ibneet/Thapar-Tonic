@@ -1,9 +1,10 @@
 import React from 'react';
-import { View, Text, StyleSheet,Image, Button, TextInput,TouchableOpacity,ScrollView,KeyboardAvoidingView } from 'react-native';
+import { View, Text, StyleSheet,Image, TextInput,TouchableOpacity,ScrollView,KeyboardAvoidingView } from 'react-native';
 import DatePicker from 'react-native-datepicker'
 import {Picker} from 'native-base'
 import { Entypo } from '@expo/vector-icons'
 import * as firebase from 'firebase'
+import { Button } from 'native-base'
 
 export default class Student extends React.Component {
 
@@ -55,7 +56,9 @@ export default class Student extends React.Component {
         <KeyboardAvoidingView behavior='height' enabled>
         <ScrollView>
             <View style={styles.container1}>
-                <Text>*Fill up the following details.</Text>
+                <TouchableOpacity activeOpacity={0.5} onPress={() => {
+                    this.props.navigation.navigate('CameraScreen')
+                }}>
                 <View style={[styles.imageHolder]}>
                 <Image 
                 resizeMode = 'center'
@@ -65,15 +68,16 @@ export default class Student extends React.Component {
                 }
                 />
                 </View>
+                </TouchableOpacity>
                 
-                <TouchableOpacity activeOpacity={0.5} onPress={() => {
+                {/* <TouchableOpacity activeOpacity={0.5} onPress={() => {
                     this.props.navigation.navigate('CameraScreen')
                 }}>
                     <Entypo 
                     name='camera'
                     size={30}
                     />
-                </TouchableOpacity>
+                </TouchableOpacity> */}
                 
                 
                     <TextInput style = {styles.input}
@@ -203,7 +207,9 @@ export default class Student extends React.Component {
                     
                     <View style={styles.button}>  
                         <Button 
-                        title='Submit'
+                        style={styles.button3}
+                        full
+                        rounded
                         onPress={() => {
                             this.signupUser(
                                 this.state.name,
@@ -215,7 +221,9 @@ export default class Student extends React.Component {
                             )
                             
                         }}
-                        />
+                        >
+                            <Text style={styles.text}>Submit</Text>
+                        </Button>    
                     </View>
                 </View>
                 <View style={styles.empty}></View>
@@ -229,17 +237,21 @@ const styles = StyleSheet.create({
     input: {
         width: 350,
         height: 55,
-        backgroundColor: '#42A5F5',
+        backgroundColor: '#333945',
         margin: 10,
         padding: 8,
         borderRadius: 14,
-        borderColor: '#111212',
-        borderWidth:1
+        borderColor: '#fff',
+        borderWidth:1,
+        color: '#fff',
+        fontSize: 18
       },
     container1: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        backgroundColor: '#333945',
+        padding: 8
     },
     
   inputContainer: {
@@ -271,7 +283,18 @@ const styles = StyleSheet.create({
     },
     empty: {
       height: 80,
-      backgroundColor: '#fff'
-    } 
+      backgroundColor: '#333945'
+    },
+    button3: {
+        margin: 10,
+        padding: 8,
+        borderColor: '#111212',
+        borderWidth:1
+     },
+     text: {
+       fontWeight: 'bold',
+       color: '#fff',
+       fontSize: 18
+     } 
 
 })

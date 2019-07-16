@@ -1,55 +1,80 @@
 import React from 'react';
-import { View, Text, StyleSheet,Image, Button } from 'react-native';
+import { View, Text, StyleSheet,Image } from 'react-native';
 import SomeText from '../src/components/SomeText';
+import { Button } from 'native-base'
+import { LinearGradient } from 'expo'
+
 
 export default class Start extends React.Component {
   render() {
     return(
-      <View style={styles.container1}>
+      <LinearGradient colors={['#2F363F','#F5BCBA','#2B2B52']} style={styles.container1}>
+      
         <View style={styles.container2}>
           <Image source={require('../assets/noimage.jpg')}
           style={{ width: 100, height: 100 }}/>
         </View>
-        <View style={styles.container3 }>
+        <View style={{marginBottom:180, flex: 1, alignItems:'center', justifyContent: 'center'}}>
           <SomeText name='Thapar Tonic'/>
-          <View style={{paddingBottom: 10}}>
+          
             <Button 
-            title='Create New Account'
+            full
+            rounded
+            style={styles.button}
             onPress={() => {this.props.navigation.navigate('CreateNewAccount')}}
-            />
-          </View>
-          <View style={{paddingBottom: 10}}>
+            >
+              <Text style={styles.text}>Create New Account</Text>
+            </Button>  
+         
+          
             <Button 
-            title='Login'
+            full
+            rounded
+            style={styles.button}
             onPress={() => {this.props.navigation.navigate('Login')}}
-            />
-          </View>
-          <View style={{paddingBottom: 10}}>
+            >
+              <Text style={styles.text}>Login</Text>
+            </Button>
+          
+          
             <Button 
-            title='Over view'
+            full 
+            rounded
+            style={styles.button}
             // onPress={() => {this.props.navigation.navigate('CreateNewAccount')}}
-            />
-          </View>
-        </View>
-      </View>
+            >
+              <Text style={styles.text}>Over View</Text>
+            </Button>
+          
+        
+            </View>
+      </LinearGradient>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container1: {
-    flex:1, 
-    flexDirection: 'row-reverse', 
-    marginTop: 40
+    flex:1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding:8,
   },
   container2: { 
-    flex:1, 
-    marginRight: 55 
+    flex:1,
+    marginRight: 55,
+    marginLeft: 275,
   },
-  container3: { 
-    flex:2, 
-    marginLeft: 140, 
-    marginTop: 200,
-    paddingBottom: 10 
-  }
+  button: {
+      margin: 10,
+      paddingHorizontal: 50,
+      borderColor: '#111212',
+      borderWidth:1
+   },
+   text: {
+     fontWeight: 'bold',
+     color: '#fff',
+     fontSize: 18
+   }
+  
 })

@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, Text, StyleSheet,Image, Button, Picker, ScrollView, TextInput } from 'react-native';
+import { View, Text, StyleSheet,Image, Picker, ScrollView, TextInput } from 'react-native';
 import Student from './Student';
 import * as firebase from 'firebase'
+import { Button } from 'native-base'
 
 export default class Login extends React.Component {
 
@@ -46,8 +47,7 @@ export default class Login extends React.Component {
           <Image source={require('../assets/noimage.jpg')}
           style={{ width: 100, height: 100 }}/>
         </View>
-        <View style={styles.container3}>
-            
+          
             <Picker
                 selectedValue={this.state.Identity}
                 style={styles.picker}
@@ -59,7 +59,7 @@ export default class Login extends React.Component {
                 <Picker.Item label="Teacher" value="Teacher" />
                 <Picker.Item label="Parent" value="Parent" />
             </Picker>
-        <View style={styles.inputContainer}>        
+
             <TextInput style = {styles.input}
                 keyboardType= 'email-address'
                 placeholder= 'Email Address'
@@ -71,8 +71,7 @@ export default class Login extends React.Component {
                     })
                 }
             />
-        </View>
-        <View style={styles.inputContainer}>        
+            
             <TextInput 
                 
                 secureTextEntry={true} 
@@ -87,19 +86,21 @@ export default class Login extends React.Component {
                     })
                 }
             />
-        </View>
-        <View style={{paddingTop: 10, width:210, height:60}}>  
+           
             <Button 
-            title='Log In'
+            full
+            rounded
             onPress={() => {this.signInUser(
               this.state.email,
               this.state.password,
               this.state.Identity
             )}}
-            />
-        </View>
-
-        </View>
+            >
+              <Text >Login</Text>
+            </Button>
+           
+        
+          
         
       </View>
       <View style={styles.empty}></View>
@@ -109,46 +110,53 @@ export default class Login extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  container1: {
-    flex:1, 
-    flexDirection: 'row-reverse', 
-    marginTop: 40
-  },
-  container2: { 
-    flex:2, 
-    marginRight: 55,
-    marginLeft:80 
-
-  },
-  container3: { 
-    flex:2, 
-    marginLeft: 70, 
-    marginTop: 200,
-    paddingBottom: 10 
-  },
   input: {
-    height: 50,
-    width: 150,
-    justifyContent: 'center',
-    alignContent: 'center'
+    width: 350,
+    height: 55,
+    backgroundColor: '#333945',
+    margin: 10,
+    padding: 8,
+    borderRadius: 14,
+    borderColor: '#fff',
+    borderWidth:1,
+    fontSize: 18,
+    color: '#fff'
   },
+container1: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#333945',
+    padding:8
+},
   picker: {
       height: 50,
-      width: 200,
-      paddingBottom: 5
-  },
-  inputContainer: {
-    height: 50,
-    width: 210,
-    borderEndColor: 'black',
-    backgroundColor: '#EAF0F1',
-    borderWidth: 2,
-    borderRadius:5
+      width: 350,
+      paddingBottom: 5,
+      color: '#fff',
+      fontSize: 18
 
+  },
+  container2: { 
+    flex:1,
+    marginRight: 55,
+    marginLeft: 275,
+    marginBottom: 100
   },
   empty: {
     height: 300,
-    backgroundColor: '#fff'
-  }
+    backgroundColor: '#333945'
+  },
+  button: {
+    margin: 10,
+    paddingHorizontal: 50,
+    borderColor: '#111212',
+    borderWidth:1
+ },
+ text: {
+   fontWeight: 'bold',
+   color: '#fff',
+   fontSize: 18
+ }
 
 })
