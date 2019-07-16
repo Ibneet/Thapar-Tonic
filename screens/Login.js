@@ -90,13 +90,14 @@ export default class Login extends React.Component {
             <Button 
             full
             rounded
+            style={styles.button}
             onPress={() => {this.signInUser(
               this.state.email,
               this.state.password,
               this.state.Identity
             )}}
             >
-              <Text >Login</Text>
+              <Text style={styles.text}>Login</Text>
             </Button>
            
         
